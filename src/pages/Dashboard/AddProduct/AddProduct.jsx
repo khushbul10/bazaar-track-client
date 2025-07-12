@@ -69,6 +69,8 @@ const AddProduct = () => {
       const formattedData = {
         ...data,
         productImage: imageUrl, // Set the uploaded image URL
+        vendorName: user?.displayName || "Unknown Vendor", // Use user's display name or fallback
+        vendorEmail: user?.email || "vendor email",
         priceHistory: priceHistory.map(item => ({
           ...item,
           date: item.date.toISOString(), // Ensure date is in ISO format
@@ -79,7 +81,8 @@ const AddProduct = () => {
       console.log(formattedData); // Send this to your backend API for saving the product
       axiosSecure.post("/products", formattedData)
         .then(response => {
-          if (response.data.success) {
+          console.log("Product added successfully:", response.data);
+          if (response.data.acknowledged) {
             Swal.fire("Success", "Product added successfully!", "success");
             reset(); // Reset the form after successful submission
           } else {
