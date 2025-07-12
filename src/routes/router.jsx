@@ -7,6 +7,7 @@ import Dashboard from "../layouts/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import VendorRoute from "./VendorRoute";
+import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
 
 
 export const router = createBrowserRouter([
@@ -39,7 +40,8 @@ export const router = createBrowserRouter([
         element: <VendorRoute><AddProduct /></VendorRoute>
       },
       {
-
+        path: "update-products",
+        element: <VendorRoute><UpdateProduct /></VendorRoute>
       }
     ]
   }
