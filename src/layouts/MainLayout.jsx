@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router';
 // import Navbar from '../components/Navbar';
 // import Footer from '../components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
+import Navbar from '../Shared/Navbar/Navbar';
+import Footer from '../Shared/Footer/Footer';
 
 const MainLayout = () => {
   const location = useLocation();
@@ -10,7 +12,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen bg-green-50">
       {/* Header */}
-      {/* <Navbar /> */}
+      <Navbar></Navbar>
 
       {/* Page Content with smooth transitions */}
       <AnimatePresence mode="wait">
@@ -29,7 +31,7 @@ const MainLayout = () => {
       </AnimatePresence>
 
       {/* Footer */}
-      {/* <Footer /> */}
+      <Footer></Footer>
     </div>
   );
 };
