@@ -10,10 +10,14 @@ import useUploadImage from "../../../hooks/useUploadImage"; // Import the useUpl
 import useAuth from "../../../hooks/useAuth"; // Import custom useAuth hook
 import { toast } from "react-toastify"; // For showing notifications
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useParams } from "react-router";
 
 const UpdateProduct = ({ match }) => {
   const { user } = useAuth(); // Get the logged-in user data
   const axiosSecure = useAxiosSecure(); // Custom hook for secure axios requests
+  const { productId } = useParams();
+
+  console.log("Product ID:", productId);
 
   // State to store existing product data
   const [product, setProduct] = useState(null);
@@ -45,7 +49,7 @@ const UpdateProduct = ({ match }) => {
     const fetchProductData = async () => {
       try {
         // Fetch product data from your backend based on the product ID (use match.params.id if using React Router)
-        const response = await axiosSecure.get(`/products/${match.params.id}`);
+        const response = await axiosSecure.get(`/products/${productId}`);
         const productData = response.data;
         
         // Set product data into form fields
@@ -64,7 +68,7 @@ const UpdateProduct = ({ match }) => {
     };
     
     fetchProductData();
-  }, [match.params.id, setValue]);
+  }, [productId, setValue]);
 
   // Handle form submission
   const onSubmit = async (data) => {

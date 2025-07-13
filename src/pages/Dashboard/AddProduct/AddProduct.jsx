@@ -71,6 +71,7 @@ const AddProduct = () => {
         productImage: imageUrl, // Set the uploaded image URL
         vendorName: user?.displayName || "Unknown Vendor", // Use user's display name or fallback
         vendorEmail: user?.email || "vendor email",
+        status: "pending", // Default status
         priceHistory: priceHistory.map(item => ({
           ...item,
           date: item.date.toISOString(), // Ensure date is in ISO format

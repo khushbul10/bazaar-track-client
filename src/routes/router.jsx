@@ -8,6 +8,10 @@ import PrivateRoute from "./PrivateRoute";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import VendorRoute from "./VendorRoute";
 import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
+import AllProductsPage from "../pages/AllProductPage/AllProuctPage";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AllProducts from "../pages/Dashboard/AllProducts/AllProducts";
 
 
 export const router = createBrowserRouter([
@@ -27,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: Login
+      },
+      {
+        path: "/products",
+        Component: AllProductsPage
       }
     ]
   },
@@ -40,8 +48,18 @@ export const router = createBrowserRouter([
         element: <VendorRoute><AddProduct /></VendorRoute>
       },
       {
-        path: "update-products",
+        path: "update-products/:productId",
         element: <VendorRoute><UpdateProduct /></VendorRoute>
+      },
+      
+      // admin routes
+      {
+        path: "all-users",
+        element: <AdminRoute><AllUsers /></AdminRoute>
+      },
+      {
+        path: "all-products",
+        element: <AdminRoute><AllProducts /></AdminRoute>
       }
     ]
   }

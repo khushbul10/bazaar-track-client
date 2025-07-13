@@ -33,7 +33,7 @@ const Register = () => {
 
     // const photoURL = "https://i.ibb.co/8M0CM5w/default-avatar.png"; // Default image URL
     try {
-      // let photoURL = "https://i.ibb.co/8M0CM5w/default-avatar.png";
+      let photoURL = "https://i.ibb.co/8M0CM5w/default-avatar.png";
 
       // ✅ Upload image if selected
       if (photo && photo[0]) {

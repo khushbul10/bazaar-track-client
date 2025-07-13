@@ -1,12 +1,14 @@
 import React from "react";
-import { Link, NavLink, Outlet, useNavigate } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import { FaTachometerAlt, FaBoxOpen, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import useUserRole from "../hooks/useUserRole";
 
 const Dashboard = () => {
-  const { user, logoutUser, role } = useAuth();
+  const { user, logoutUser } = useAuth();
+  const { role } = useUserRole();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -68,6 +70,7 @@ const Dashboard = () => {
         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-64 bg-green-700 text-white min-h-full">
           <h2 className="text-xl font-bold mb-4 text-center">BazaarTrack</h2>
+          {/* Common link for all users */}
           <li>
             <NavLink
               to="/dashboard"
@@ -79,46 +82,94 @@ const Dashboard = () => {
               <FaTachometerAlt /> Overview
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/products"
-              className={({ isActive }) =>
-                isActive ? "bg-green-600 font-semibold" : ""
-              }
-            >
-              <FaBoxOpen /> Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/add-products"
-              className={({ isActive }) =>
-                isActive ? "bg-green-600 font-semibold" : ""
-              }
-            >
-              <FaBoxOpen />Add Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/update-products"
-              className={({ isActive }) =>
-                isActive ? "bg-green-600 font-semibold" : ""
-              }
-            >
-              <FaBoxOpen />Update Products
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/profile"
-              className={({ isActive }) =>
-                isActive ? "bg-green-600 font-semibold" : ""
-              }
-            >
-              <FaUser /> Profile
-            </NavLink>
-          </li>
+
+          {/* Admin-specific links */}
+          {role === "admin" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/all-users"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/all-products"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> All Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/add-products"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> Add Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/update-products"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> Update Products
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* Vendor-specific links */}
+          {role === "vendor" && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/products"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> My Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/add-products"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> Add Products
+                </NavLink>
+              </li>
+            </>
+          )}
+
+          {/* User-specific link */}
+          {role === "user" && (
+            <li>
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive ? "bg-green-600 font-semibold" : ""
+                }
+              >
+                <FaUser /> Profile
+              </NavLink>
+            </li>
+          )}
+
+          {/* Logout button */}
           <li>
             <button onClick={handleLogout}>
               <FaSignOutAlt /> Logout
