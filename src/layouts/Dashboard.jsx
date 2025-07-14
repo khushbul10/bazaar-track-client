@@ -152,6 +152,26 @@ const Dashboard = () => {
                   <FaBoxOpen /> Add Products
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/add-ads"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> Add Advertisements
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/ads"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaBoxOpen /> My Advertisements
+                </NavLink>
+              </li>
             </>
           )}
 

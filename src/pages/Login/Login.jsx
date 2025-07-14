@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import sticker from "../../assets/login.png"; // Replace with your sticker path
 
 const Login = () => {
-  const { signInUser, googleLogin } = useAuth();
+  const { loginUser, googleLogin } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -20,7 +20,7 @@ const Login = () => {
     const { email, password } = data;
 
     try {
-      await signInUser(email, password);
+      await loginUser(email, password);
       toast.success("Login successful!");
       navigate("/");
     } catch (err) {
