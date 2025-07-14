@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import logo from "/logo.png";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
         {/* Logo & Website Name */}
         <div className="flex flex-col items-center md:items-start">
           <img
-            src="/logo.svg"
+            src={logo}
             alt="Logo"
             className="h-12 w-12 rounded-full bg-green-700 p-1 mb-2"
           />

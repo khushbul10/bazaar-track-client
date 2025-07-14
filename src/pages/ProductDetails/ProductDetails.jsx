@@ -20,16 +20,19 @@ import { FaStar, FaRegStar } from "react-icons/fa"; // React Icons for stars
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Shared/Loader/Loader";
 import Payment from "./Payment";
+import useUserRole from "../../hooks/useUserRole";
 
 const ProductDetails = () => {
   const { productId } = useParams(); // Get product ID from URL
   // const [product, setProduct] = useState(null);
   const [paymentToggle, setPaymentToggle] = useState(true); // Toggle for payment form
   const { user } = useAuth();
+  const { role, isLoading: roleLoading } = useUserRole();
+  console.log(role);
   console.log(user);
   const axiosSecure = useAxiosSecure();
   // const [reviews, setReviews] = useState([]);
-  const [watchlist, setWatchlist] = useState(false); // For watchlist feature
+  // const [watchlist, setWatchlist] = useState(false); // For watchlist feature
   // const [priceHistory, setPriceHistory] = useState([]);
   const [userReview, setUserReview] = useState({ rating: 0, comment: "" }); // User review state
   const navigate = useNavigate();
@@ -47,7 +50,24 @@ const ProductDetails = () => {
       return response.data;
     },
   });
-  console.log(product);
+
+  // Check if the product is in the user's watchlist
+  const { data : watchlistData, isLoading: watchlistLoading , refetch: refetchWatchlist} = useQuery({
+    queryKey: ["watchlist", user?.email, productId],
+    queryFn: async () => {
+      if (user?.email) {
+        const response = await axiosSecure.get(`/watchlists/check?userEmail=${user.email}&productId=${productId}`);
+        // setWatchlist(response.data.exists); // Set watchlist state based on response
+        return response.data; // Return watchlist data
+      }
+      return null; // No data to return
+    },
+    enabled: !!user?.email && !!productId, // Only run if user is logged in and productId is available
+  });
+  console.log("watchlist data", watchlistData);
+  // const watchlistData = {
+  //   exists: false, // Placeholder for watchlist existence check
+  // }
   // useEffect(() => {
   //   const fetchProductDetails = async () => {
   //     try {
@@ -66,8 +86,20 @@ const ProductDetails = () => {
   // Handle adding product to watchlist
   const handleWatchlist = () => {
     if (product) {
-      setWatchlist(true);
-      toast.success("Added to Watchlist!");
+      axiosSecure.post("/watchlists", {
+        productId: product._id,
+        productName: product.itemName,
+        marketName: product.marketName,
+        date: new Date(),
+        userEmail: user.email,
+      })
+      .then(() => {
+        toast.success("Product added to watchlist!");
+      })
+      .catch((error) => {
+        console.error("Error adding to watchlist:", error);
+        toast.error("Failed to add product to watchlist.");
+      });
     }
   };
 
@@ -130,10 +162,10 @@ const ProductDetails = () => {
     setUserReview({ ...userReview, rating });
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading || roleLoading || watchlistLoading ) return <Loader />;
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
+    <div className="md:p-8 min-h-screen">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg"
         initial={{ opacity: 0 }}
@@ -141,12 +173,8 @@ const ProductDetails = () => {
         transition={{ duration: 1 }}
       >
         {/* Product Information */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col  justify-between  mb-6">
           <div>
-            <h1 className="text-4xl font-semibold text-gray-800">
-              {product.itemName}
-            </h1>
-            <p className="text-xl text-gray-600">{product.marketName}</p>
             <div className="mt-4">
               <img
                 src={product.productImage}
@@ -154,6 +182,10 @@ const ProductDetails = () => {
                 className="w-full h-auto rounded-lg"
               />
             </div>
+            <h1 className="text-4xl font-semibold text-gray-800">
+              {product.itemName}
+            </h1>
+            <p className="text-xl text-gray-600">{product.marketName}</p>
             <p className="mt-4 text-lg font-semibold">
               Price: ৳{product.pricePerUnit}
             </p>
@@ -163,13 +195,15 @@ const ProductDetails = () => {
           </div>
 
           {/* Add to Watchlist Button */}
+
           <div>
-            {product.vendorEmail !== user.email && (
+            {(role == 'user' ) && (
               <button
                 onClick={handleWatchlist}
-                className="bg-green-600 text-white py-3 px-8 rounded-lg"
+                className={`bg-green-600 mt-2 text-white py-3 px-8 rounded-lg ${watchlistData.exists ? "opacity-50 cursor-not-allowed" : ""}`}
+                disabled={watchlistData.exists}
               >
-                {watchlist ? "Added to Watchlist" : "Add to Watchlist"}
+                {watchlistData.exists ? "Added to Watchlist" : "Add to Watchlist"}
               </button>
             )}
           </div>

@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import logo from "/logo.png";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -29,7 +30,7 @@ const Navbar = () => {
           {/* Logo & Name */}
           <Link to="/" className="flex items-center gap-2">
             <img
-              src="/logo.svg"
+              src={logo}
               alt="Logo"
               className="h-10 w-10 rounded-full bg-green-200 p-1"
             />
