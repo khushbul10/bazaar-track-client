@@ -52,7 +52,7 @@ const MyAdvertisements = () => {
 
     if (result.isConfirmed) {
       try {
-        await axiosSecure.delete(`/ads/${adId}`);
+        await axiosSecure.delete(`/advertisements/${adId}`);
         refetch(); // Refetch advertisements after deletion
         toast.success("Advertisement deleted successfully!");
       } catch (error) {
@@ -126,7 +126,7 @@ const MyAdvertisements = () => {
       console.log("Submitting Ad Data:", adData);
 
       if (currentAd) {
-        await axiosSecure.patch(`/ads/${currentAd._id}`, adData);
+        await axiosSecure.patch(`/advertisements/${currentAd._id}`, adData);
         toast.success("Advertisement updated successfully!");
       } else {
         await axiosSecure.post("/advertisements", adData);
@@ -158,7 +158,7 @@ const MyAdvertisements = () => {
               <h2
                 className="text-3xl text-green-600 text-center font-semibold"
               >
-                Add Advertisement
+                {currentAd ? "Update Advertisement" : "Add Advertisement"}
               </h2>
               
             </div>
