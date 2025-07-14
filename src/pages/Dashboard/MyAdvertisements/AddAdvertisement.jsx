@@ -1,16 +1,30 @@
 // src/pages/AddAdvertisement.jsx
 
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useForm } from "react-hook-form";
+import useUploadImage from "../../../hooks/useUploadImage";
+import useAuth from "../../../hooks/useAuth";
 
-const AddAdvertisement = ({ onSubmit }) => {
-  const [imageUrl, setImageUrl] = useState(""); // For storing image URL after upload
+const AddAdvertisement = () => {
+  // const [imageUrl, setImageUrl] = useState(""); // For storing image URL after upload
+  // const [currentAd, setCurrentAd] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const { uploadImage, isLoading: uploadLoading } = useUploadImage();
+  const navigate = useNavigate();
+  // const { adId } = useParams(); // To handle update for specific advertisement
 
   // React Hook Form setup
-  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    reset,
+  } = useForm({
     defaultValues: {
       adTitle: "",
       shortDescription: "",
@@ -28,10 +42,11 @@ const AddAdvertisement = ({ onSubmit }) => {
   const handleFormSubmit = async (data) => {
     try {
       let imageUrl = data.productImage;
+
       if (typeof imageUrl !== "string") {
         // If image is uploaded, upload it and get the URL
         await new Promise((resolve) => {
-          uploadImage(data.productImage[0], {
+          uploadImage(data.productImage, {
             onSuccess: (url) => {
               imageUrl = url;
               resolve();
@@ -44,84 +59,90 @@ const AddAdvertisement = ({ onSubmit }) => {
         });
       }
 
-      // Prepare the advertisement data
+      // Prepare advertisement data
       const adData = {
         ...data,
         productImage: imageUrl,
+        vendorName: user?.displayName,
+        vendorEmail: user?.email,
       };
 
-      // Call the onSubmit function passed from the parent component to handle advertisement submission
-      await onSubmit(adData);
+      // Add a new advertisement
+      await axiosSecure.post("/advertisements", adData);
       toast.success("Advertisement added successfully!");
+
       reset(); // Reset the form after submission
+      navigate("/dashboard/ads"); // Redirect to the advertisement list page
     } catch (error) {
       toast.error("Error submitting advertisement!");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
-      {/* Ad Title */}
-      <div>
-        <label className="block text-lg font-medium text-gray-700">Ad Title</label>
-        <input
-          {...register("adTitle", { required: "Ad Title is required" })}
-          className="w-full p-3 border-2 border-gray-300 rounded-lg"
-        />
-        {errors.adTitle && <p className="text-red-500">{errors.adTitle.message}</p>}
-      </div>
-
-      {/* Short Description */}
-      <div>
-        <label className="block text-lg font-medium text-gray-700">Short Description</label>
-        <textarea
-          {...register("shortDescription", { required: "Short Description is required" })}
-          className="w-full p-3 border-2 border-gray-300 rounded-lg"
-        />
-        {errors.shortDescription && <p className="text-red-500">{errors.shortDescription.message}</p>}
-      </div>
-
-      {/* Image Upload */}
-      <div>
-        <label className="block text-lg font-medium text-gray-700">Image Upload</label>
-        <input
-          type="file"
-          {...register("productImage", { required: "Image is required" })}
-          className="w-full p-3 border-2 border-gray-300 rounded-lg"
-          onChange={handleImageChange}
-        />
-        {errors.productImage && <p className="text-red-500">{errors.productImage.message}</p>}
-      </div>
-
-      {/* Status */}
-      <div>
-        <label className="block text-lg font-medium text-gray-700">Status</label>
-        <select
-          {...register("status")}
-          className="w-full p-3 border-2 border-gray-300 rounded-lg"
-        >
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-          <option value="rejected">Rejected</option>
-        </select>
-      </div>
-
-      <div className="flex justify-end space-x-4">
-        <button
-          type="button"
-          className="bg-gray-500 text-white py-2 px-4 rounded-lg"
-          onClick={() => reset()}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="bg-green-600 text-white py-2 px-4 rounded-lg"
-        >
+    <div className="md:p-8 bg-green-50">
+      <div className="max-w-4xl mx-auto p-4 md:p-8 rounded-lg ">
+        <h2 className="text-3xl text-green-700 font-semibold text-center mb-6">
           Add Advertisement
-        </button>
+        </h2>
+
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+          {/* Ad Title */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">
+              Ad Title
+            </label>
+            <input
+              {...register("adTitle", { required: "Ad Title is required" })}
+              className="w-full p-3 border-2 border-gray-300 rounded-lg"
+            />
+            {errors.adTitle && (
+              <p className="text-red-500">{errors.adTitle.message}</p>
+            )}
+          </div>
+
+          {/* Short Description */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">
+              Short Description
+            </label>
+            <textarea
+              {...register("shortDescription", {
+                required: "Short Description is required",
+              })}
+              className="w-full p-3 border-2 border-gray-300 rounded-lg"
+            />
+            {errors.shortDescription && (
+              <p className="text-red-500">{errors.shortDescription.message}</p>
+            )}
+          </div>
+
+          {/* Image Upload */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">
+              Image Upload
+            </label>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              className="w-full p-3 border-2 border-gray-300 rounded-lg"
+            />
+            {errors.productImage && (
+              <p className="text-red-500">{errors.productImage.message}</p>
+            )}
+          </div>
+
+          <div className="my-6">
+            
+            <button
+              type="submit"
+              className="bg-green-600 w-full text-white py-2 px-4 rounded-lg"
+            >
+              Add Advertisement
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 
