@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import sticker from "../../assets/login.png"; // Replace with your sticker path
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
   const { loginUser, googleLogin } = useAuth();
@@ -118,11 +119,8 @@ const Login = () => {
           onClick={handleGoogleSignIn}
           className="w-full flex items-center justify-center gap-2 bg-white border border-green-300 text-green-700 font-semibold p-3 rounded-lg hover:bg-green-50 transition shadow-sm"
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-            alt="Google"
-            className="w-6 h-6"
-          />
+          
+          <FaGoogle></FaGoogle>
           Continue with Google
         </button>
       </div>

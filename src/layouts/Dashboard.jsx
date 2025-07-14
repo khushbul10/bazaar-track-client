@@ -164,7 +164,7 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
-                  to="/dashboard/products"
+                  to="/dashboard/my-products"
                   className={({ isActive }) =>
                     isActive ? "bg-green-600 font-semibold" : ""
                   }

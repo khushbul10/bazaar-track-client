@@ -18,6 +18,7 @@ import AllAdvertisements from "../pages/Dashboard/AllAdvertisements/AllAdvertise
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyWatchlist from "../pages/Dashboard/MyWatchlist/MyWatchlist";
+import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 
 
 export const router = createBrowserRouter([
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
       {
         path: "add-ads",
         element: <VendorRoute><AddAdvertisement /></VendorRoute>
+      },
+      {
+        path: "my-products",
+        element: <VendorRoute><MyProducts /></VendorRoute>
       },
       
       // admin routes
