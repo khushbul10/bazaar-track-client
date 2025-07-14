@@ -17,6 +17,7 @@ import AddAdvertisement from "../pages/Dashboard/MyAdvertisements/AddAdvertiseme
 import AllAdvertisements from "../pages/Dashboard/AllAdvertisements/AllAdvertisements";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
+import MyWatchlist from "../pages/Dashboard/MyWatchlist/MyWatchlist";
 
 
 export const router = createBrowserRouter([
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "my-orders",
         element: <PrivateRoute><MyOrders /></PrivateRoute>
+      },
+      {
+        path: "my-watchlist",
+        element: <PrivateRoute><MyWatchlist /></PrivateRoute>
       },
       {
       },

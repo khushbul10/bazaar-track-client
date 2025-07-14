@@ -220,6 +220,16 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
+                  to="/dashboard/my-watchlist"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaUser /> My Watchlist
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/profile"
                   className={({ isActive }) =>
                     isActive ? "bg-green-600 font-semibold" : ""
