@@ -19,10 +19,12 @@ import useAuth from "../../hooks/useAuth";
 import { FaStar, FaRegStar } from "react-icons/fa"; // React Icons for stars
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Shared/Loader/Loader";
+import Payment from "./Payment";
 
 const ProductDetails = () => {
   const { productId } = useParams(); // Get product ID from URL
   // const [product, setProduct] = useState(null);
+  const [paymentToggle, setPaymentToggle] = useState(true); // Toggle for payment form
   const { user } = useAuth();
   console.log(user);
   const axiosSecure = useAxiosSecure();
@@ -70,14 +72,14 @@ const ProductDetails = () => {
   };
 
   // Handle Buy Product button (Stripe Payment integration)
-  const handleBuyProduct = async () => {
-    try {
-      const response = await axiosSecure.post(`/checkout/${productId}`);
-      window.location.href = response.data.paymentUrl; // Redirect to Stripe checkout page
-    } catch (error) {
-      toast.error("Error initiating payment!");
-    }
-  };
+  // const handleBuyProduct = async () => {
+  //   try {
+  //     const response = await axiosSecure.post(`/checkout/${productId}`);
+  //     window.location.href = response.data.paymentUrl; // Redirect to Stripe checkout page
+  //   } catch (error) {
+  //     toast.error("Error initiating payment!");
+  //   }
+  // };
 
   // Render price comparison chart (reversed data for latest date at right)
   const renderPriceChart = () => {
@@ -185,7 +187,7 @@ const ProductDetails = () => {
         {/* User Reviews */}
         <div className="mt-8">
           <h2 className="text-2xl font-semibold mb-4">User Reviews</h2>
-          {(product?.reviews?.length === 0 || !product?.reviews ) ? (
+          {product?.reviews?.length === 0 || !product?.reviews ? (
             <p className="text-lg text-gray-600">No reviews yet.</p>
           ) : (
             product.reviews.map((review, index) => (
@@ -272,13 +274,19 @@ const ProductDetails = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-between items-center mt-8">
-          <button
-            onClick={handleBuyProduct}
-            className="bg-green-600 text-white py-3 px-8 rounded-lg"
-          >
-            Buy Product
-          </button>
+        <div className=" mt-8">
+          {paymentToggle ? (
+            <button
+              // onClick={handleBuyProduct}
+              onClick={() => setPaymentToggle(false)}
+              className="bg-green-600 text-white w-full py-3 px-8 rounded-lg"
+            >
+              Buy Now
+            </button>
+          ) : (
+            <Payment product={product} setPaymentToggle={setPaymentToggle}></Payment>
+          )}
+          {/* <Payment className="w-full "></Payment> */}
         </div>
       </motion.div>
     </div>

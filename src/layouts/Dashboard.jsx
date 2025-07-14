@@ -1,6 +1,11 @@
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
-import { FaTachometerAlt, FaBoxOpen, FaUser, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaTachometerAlt,
+  FaBoxOpen,
+  FaUser,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
@@ -42,17 +47,32 @@ const Dashboard = () => {
         {/* Topbar */}
         <div className="w-full navbar bg-white shadow px-4 justify-between">
           <div className="flex items-center gap-2">
-            <label htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round"
-                  strokeLinejoin="round" strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <label
+              htmlFor="dashboard-drawer"
+              className="btn btn-ghost lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
             </label>
             <h1 className="text-lg font-bold text-green-800">Dashboard</h1>
           </div>
           {user && (
             <img
-              src={user.photoURL || "https://i.ibb.co/8M0CM5w/default-avatar.png"}
+              src={
+                user.photoURL || "https://i.ibb.co/8M0CM5w/default-avatar.png"
+              }
               alt="Profile"
               className="h-10 w-10 rounded-full border-2 border-green-400 object-cover"
             />
@@ -187,16 +207,28 @@ const Dashboard = () => {
 
           {/* User-specific link */}
           {role === "user" && (
-            <li>
-              <NavLink
-                to="/dashboard/profile"
-                className={({ isActive }) =>
-                  isActive ? "bg-green-600 font-semibold" : ""
-                }
-              >
-                <FaUser /> Profile
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard/my-orders"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaUser /> My Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/profile"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaUser /> Profile
+                </NavLink>
+              </li>
+            </>
           )}
 
           {/* Logout button */}

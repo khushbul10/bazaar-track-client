@@ -16,6 +16,7 @@ import MyAdvertisements from "../pages/Dashboard/MyAdvertisements/MyAdvertisemen
 import AddAdvertisement from "../pages/Dashboard/MyAdvertisements/AddAdvertisement";
 import AllAdvertisements from "../pages/Dashboard/AllAdvertisements/AllAdvertisements";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +52,16 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><Dashboard /></PrivateRoute>,
     errorElement: <div>Error occurred in Dashboard</div>,
     children: [
+      // user routes
+      {
+        path: "my-orders",
+        element: <PrivateRoute><MyOrders /></PrivateRoute>
+      },
+      {
+      },
+
+
+      // vendor routes
       {
         path: "add-products",
         element: <VendorRoute><AddProduct /></VendorRoute>
