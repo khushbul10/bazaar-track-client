@@ -84,11 +84,11 @@ const AllProductsPage = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 min-h-screen">
       <h1 className="text-3xl font-semibold text-center mb-6">All Products</h1>
 
       {/* Filter & Sort Section */}
-      <div className="flex flex-col sm:flex-row justify-between mb-6 bg-white p-4 rounded-lg shadow-md">
+      <div className="flex md:flex-col sm:flex-row justify-between mb-6 bg-green-100 p-4 rounded-lg shadow-md">
         {/* Sorting */}
         <div className="flex items-center space-x-4">
           <label htmlFor="sortPrice" className="text-lg font-medium text-gray-700">Sort by Price:</label>
@@ -96,7 +96,7 @@ const AllProductsPage = () => {
             id="sortPrice"
             value={priceSort}
             onChange={handleSortChange}
-            className="p-2 rounded-md border-2 border-gray-300"
+            className="p-2 rounded-md border-2 w-full border-green-300"
           >
             <option value="">Select</option>
             <option value="asc">Price Low to High</option>
@@ -105,24 +105,25 @@ const AllProductsPage = () => {
         </div>
 
         {/* Date Filter */}
-        <div className="flex items-center space-x-4">
+        <div className="flex w-full items-center mt-2 text-lg font-medium text-gray-700 space-x-4">
           <label htmlFor="startDate" className="text-lg font-medium text-gray-700">Date Range:</label>
-          <div className="flex space-x-2">
+          <div className="flex w-full items-center space-x-2">
             <input
               type="date"
               name="startDate"
               value={dateRange.startDate}
               onChange={handleDateFilterChange}
               onBlur={handleDateRangeChange} // Trigger refetch when date range changes
-              className="p-2 rounded-md border-2 border-gray-300"
+              className="p-2 w-full rounded-md border-2 border-green-300"
             />
+            <p>to</p>
             <input
               type="date"
               name="endDate"
               value={dateRange.endDate}
               onChange={handleDateFilterChange}
               onBlur={handleDateRangeChange} // Trigger refetch when date range changes
-              className="p-2 rounded-md border-2 border-gray-300"
+              className="p-2 w-full rounded-md border-2 border-green-300"
             />
           </div>
         </div>
@@ -131,7 +132,7 @@ const AllProductsPage = () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6">
         {data && data.products.map((product) => (
-          <div key={product._id} className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
+          <div key={product._id} className="bg-green-100 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
             <img src={product.productImage} alt={product.itemName} className="w-full h-48 object-cover mb-4 rounded-md" />
             <h2 className="text-xl font-semibold text-gray-800">{product.itemName}</h2>
             <p className="text-lg text-gray-600 mb-2">Market: {product.marketName}</p>
@@ -140,7 +141,7 @@ const AllProductsPage = () => {
             <p className="text-sm text-gray-400 mb-4">Date: {new Date(product.date).toLocaleDateString()}</p>
             <button
               onClick={() => handleViewDetails(product._id)}
-              className="bg-blue-600 text-white py-2 px-4 rounded-md w-full hover:bg-blue-700 transition-all duration-200"
+              className="bg-green-600 text-white py-2 px-4 rounded-md w-full hover:bg-green-700 transition-all duration-200"
             >
               View Details
             </button>

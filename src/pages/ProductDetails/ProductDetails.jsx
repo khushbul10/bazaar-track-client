@@ -92,9 +92,11 @@ const ProductDetails = () => {
         marketName: product.marketName,
         date: new Date(),
         userEmail: user.email,
+        productImage: product.productImage,
       })
       .then(() => {
         toast.success("Product added to watchlist!");
+        refetchWatchlist(); // Refetch watchlist data to update UI
       })
       .catch((error) => {
         console.error("Error adding to watchlist:", error);

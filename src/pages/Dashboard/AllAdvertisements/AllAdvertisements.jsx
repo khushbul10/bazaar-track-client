@@ -55,14 +55,14 @@ const AllAdvertisements = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <h2 className="text-3xl font-bold text-gray-800 mb-6">All Advertisements</h2>
 
       {/* Table to display all advertisements */}
       <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
         <table className="min-w-full table-auto border-collapse">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-green-100">
               <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Ad Title</th>
               <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Short Description</th>
               <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Status</th>

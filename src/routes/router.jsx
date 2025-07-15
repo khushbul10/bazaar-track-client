@@ -19,6 +19,8 @@ import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import MyWatchlist from "../pages/Dashboard/MyWatchlist/MyWatchlist";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
+import AllOrders from "../pages/Dashboard/AllOrders/AllOrder";
+import PriceTrendsPage from "../pages/Dashboard/PriceTrendsPage/PriceTrendsPage";
 
 
 export const router = createBrowserRouter([
@@ -64,6 +66,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><MyWatchlist /></PrivateRoute>
       },
       {
+        path: "price-trends",
+        element: <PrivateRoute><PriceTrendsPage /></PrivateRoute>
+      },
+      {
       },
 
 
@@ -101,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "all-ads",
         element: <AdminRoute><AllAdvertisements /></AdminRoute>
+      },
+      {
+        path: "all-orders",
+        element: <AdminRoute><AllOrders /></AdminRoute>
       }
     ]
   }

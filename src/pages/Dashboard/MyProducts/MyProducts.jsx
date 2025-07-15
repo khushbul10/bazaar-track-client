@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure"; // For API requests
 import Swal from "sweetalert2"; // For confirmation modal
 import { useQuery } from "@tanstack/react-query";
@@ -32,9 +32,9 @@ const MyProducts = () => {
   });
 
   // Handle navigating to the update product page
-  const handleUpdate = (productId) => {
-    navigate(`/update-product/${productId}`);
-  };
+  // const handleUpdate = (productId) => {
+  //   navigate(`update-products/${productId}`);
+  // };
 
   // Handle removing a product from the list
   const handleDelete = async (productId) => {
@@ -60,7 +60,7 @@ const MyProducts = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="md:p-6 min-h-screen">
       <h2 className="text-2xl font-semibold mb-6">My Products</h2>
 
       {/* Products Table */}
@@ -136,15 +136,16 @@ const MyProducts = () => {
                     )}
                   </td>
                   <td className="py-2 px-4 text-sm text-gray-700">
-                    <button
-                      onClick={() => handleUpdate(product._id)}
-                      className="bg-blue-600 text-white w-full py-1 px-4 rounded-md mr-2 hover:bg-blue-700 transition duration-300"
+                    <Link
+                      to={`/dashboard/update-products/${product._id}`}
+                      // onClick={() => handleUpdate(product._id)}
+                      className="bg-blue-600 text-white btn w-full py-1 px-4 rounded-md mr-2 hover:bg-blue-700 transition duration-300"
                     >
                       Update
-                    </button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(product._id)}
-                      className="bg-red-600 text-white w-full py-1 mt-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                      className="bg-red-600 btn text-white w-full py-1 mt-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
                     >
                       Delete
                     </button>

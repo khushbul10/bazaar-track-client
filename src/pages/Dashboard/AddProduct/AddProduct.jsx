@@ -10,10 +10,12 @@ import useUploadImage from "../../../hooks/useUploadImage"; // Import the useUpl
 import useAuth from "../../../hooks/useAuth"; // Import custom useAuth hook
 import { toast } from "react-toastify"; // For showing notifications
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const AddProduct = () => {
   const { user } = useAuth(); // Get the logged-in user data
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   // React Hook Form setup
   const {
@@ -86,6 +88,7 @@ const AddProduct = () => {
           if (response.data.acknowledged) {
             Swal.fire("Success", "Product added successfully!", "success");
             reset(); // Reset the form after successful submission
+            navigate("/dashboard/my-products")
           } else {
             Swal.fire("Error", response.data.message, "error");
           }
@@ -126,9 +129,9 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="p-8 bg-gray-100">
+    <div className="md:p-8 ">
       <motion.div
-        className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg"
+        className="max-w-4xl mx-auto p-4 md:p-8 rounded-lg "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -234,7 +237,7 @@ const AddProduct = () => {
                 <DatePicker
                   selected={priceRow.date}
                   onChange={(date) => handlePriceChange(index, "date", date)}
-                  className="p-3 border-2 border-gray-300 rounded-lg w-1/3 focus:border-green-500 focus:outline-none"
+                  className="p-3 border-2 border-gray-300 rounded-lg w-full focus:border-green-500 focus:outline-none"
                   dateFormat="yyyy-MM-dd"
                 />
                 <input

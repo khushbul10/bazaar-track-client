@@ -1,17 +1,18 @@
 import React from 'react';
 import useUserRole from '../hooks/useUserRole';
+import Loader from '../Shared/Loader/Loader';
+import { Navigate, useLocation } from 'react-router';
 
 const VendorRoute = ({ children }) => {
-  const { role } = useUserRole();
-  console.log('User role:', role);
+  const { role, isLoading } = useUserRole();
+  const location = useLocation();
 
   // Check if the user is a vendor
   if (role !== 'vendor' && role !== 'admin') {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold text-red-600">Access Denied</h1>
-      </div>
-    );
+    return <Navigate to="/login" state={{ from: location}} replace ></Navigate>;
+  }
+  if(isLoading) {
+    return <Loader/>;
   }
 
   return children;

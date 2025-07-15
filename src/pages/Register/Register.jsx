@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import sticker from "../../assets/login.png"; // replace with your actual sticker path
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ const Register = () => {
   const { registerUser, updateUserProfile, googleLogin } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -69,27 +70,26 @@ const Register = () => {
       });
 
       toast.success("Registration successful!");
-      navigate("/");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
       console.error("Registration error:", err);
       toast.error(`Registration failed: ${err.message}`);
     }
   };
 
-  const handleGoogleSignIn = async () => {
+   const handleGoogleSignIn = async () => {
     try {
       const result = await googleLogin();
       const user = result.user;
-
-      await axiosSecure.post("/users", {
+      const userData = {
         name: user.displayName,
         email: user.email,
-        photo: user.photoURL,
+        photo: user.photoURL || "https://i.ibb.co/8M0CM5w/default-avatar.png",
         role: "user",
-      });
-
-      toast.success("Google sign-in successful!");
-      navigate("/");
+      };
+      await axiosSecure.post("/users", userData);
+      toast.success("Logged in with Google!");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
       console.error("Google sign-in error:", err);
       toast.error(`Google sign-in failed: ${err.message}`);
@@ -113,7 +113,7 @@ const Register = () => {
       </div>
 
       {/* Form Section */}
-      <div className="max-w-md w-full p-8 rounded-2xl border border-green-100 ">
+      <div className="max-w-md w-full md:p-8 rounded-2xl border border-green-100 ">
         <h2 className="text-3xl font-bold text-green-700 text-center mb-6">
           Create an Account
         </h2>

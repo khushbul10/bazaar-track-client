@@ -9,13 +9,14 @@ import useUploadImage from "../../../hooks/useUploadImage"; // Import the useUpl
 import useAuth from "../../../hooks/useAuth"; // Import custom useAuth hook
 import { toast } from "react-toastify"; // For showing notifications
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Loader from "../../../Shared/Loader/Loader";
 
 const UpdateProduct = () => {
   const axiosSecure = useAxiosSecure(); // Custom hook for secure axios requests
   const { productId } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   // State management for product data
   const [product, setProduct] = useState(null);
@@ -66,7 +67,9 @@ const UpdateProduct = () => {
   }, [productId]);
 
   // Handle form submission
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form submitted with data:", formData);
     try {
       let updatedImageUrl = imageUrl; // Preserve existing image URL if not updating
       if (formData.productImage && typeof formData.productImage !== "string") {
@@ -107,6 +110,7 @@ const UpdateProduct = () => {
         .patch(`/products/${productId}`, formattedData)
         .then(() => {
           toast.success("Product updated successfully!");
+          navigate("/dashboard/my-products") // Redirect to My Products page after successful update
         })
         .catch((error) => {
           console.error("Error updating product:", error);

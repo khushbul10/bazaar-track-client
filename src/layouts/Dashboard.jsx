@@ -5,7 +5,16 @@ import {
   FaBoxOpen,
   FaUser,
   FaSignOutAlt,
+  FaHouseUser,
+  FaAd,
+  FaShoppingCart,
+  FaSave,
 } from "react-icons/fa";
+import { IoIosAddCircle, IoMdArrowRoundBack } from "react-icons/io";
+import { GrDocumentUpdate } from "react-icons/gr";
+
+import { AiFillProduct } from "react-icons/ai";
+import { RiAdvertisementLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
@@ -93,6 +102,17 @@ const Dashboard = () => {
           {/* Common link for all users */}
           <li>
             <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                isActive ? "bg-green-600 font-semibold" : ""
+              }
+            >
+              <IoMdArrowRoundBack/> Back to Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard"
               end
               className={({ isActive }) =>
@@ -113,7 +133,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> All Users
+                  <FaHouseUser></FaHouseUser> All Users
                 </NavLink>
               </li>
               <li>
@@ -122,8 +142,8 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
-                >
-                  <FaBoxOpen /> All Products
+                > <AiFillProduct />
+                   All Products
                 </NavLink>
               </li>
               <li>
@@ -133,27 +153,17 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> All Advertisements
+                  <RiAdvertisementLine /> All Advertisements
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/add-products"
+                  to="/dashboard/all-orders"
                   className={({ isActive }) =>
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> Add Products
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/update-products"
-                  className={({ isActive }) =>
-                    isActive ? "bg-green-600 font-semibold" : ""
-                  }
-                >
-                  <FaBoxOpen /> Update Products
+                  <FaShoppingCart/> All Orders
                 </NavLink>
               </li>
             </>
@@ -169,7 +179,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> My Products
+                  <AiFillProduct/> My Products
                 </NavLink>
               </li>
               <li>
@@ -179,7 +189,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> Add Products
+                  <IoIosAddCircle/> Add Products
                 </NavLink>
               </li>
               <li>
@@ -189,7 +199,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> Add Advertisements
+                  <IoIosAddCircle></IoIosAddCircle> Add Advertisements
                 </NavLink>
               </li>
               <li>
@@ -199,7 +209,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaBoxOpen /> My Advertisements
+                  <FaAd/> My Advertisements
                 </NavLink>
               </li>
             </>
@@ -210,12 +220,22 @@ const Dashboard = () => {
             <>
               <li>
                 <NavLink
+                  to="/dashboard/price-trends"
+                  className={({ isActive }) =>
+                    isActive ? "bg-green-600 font-semibold" : ""
+                  }
+                >
+                  <FaShoppingCart/> Price Trends
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/my-orders"
                   className={({ isActive }) =>
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaUser /> My Orders
+                  <FaShoppingCart/> My Orders
                 </NavLink>
               </li>
               <li>
@@ -225,7 +245,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaUser /> My Watchlist
+                  <FaSave/> My Watchlist
                 </NavLink>
               </li>
               <li>

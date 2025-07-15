@@ -258,13 +258,13 @@ const MyAdvertisements = () => {
                 <td className="py-2 px-4 border-b text-sm text-gray-700">
                   <button
                     onClick={() => handleUpdate(ad)}
-                    className="bg-blue-600 text-white py-1 px-4 rounded-md mr-2 hover:bg-blue-700 transition duration-300"
+                    className="bg-blue-600 w-full text-white py-1 px-4 rounded-md mr-2 hover:bg-blue-700 transition duration-300"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDelete(ad._id)}
-                    className="bg-red-600 text-white py-1 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                    className="bg-red-600 w-full mt-2 text-white py-1 px-4 rounded-md hover:bg-red-700 transition duration-300"
                   >
                     Delete
                   </button>

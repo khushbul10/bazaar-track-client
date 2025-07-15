@@ -1,36 +1,37 @@
-// src/pages/AllUsers.jsx
-
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../../../Shared/Loader/Loader';
-import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { debounce } from 'lodash';
+import useAuth from '../../../hooks/useAuth';
 
 const AllUsers = () => {
-  const { user: thisUser } = useAuth(); // Get the logged-in user data
+  const { user: thisUser } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
 
-  // Fetch users using react-query
+  // Debounce search input to avoid spamming requests
+  const handleSearchChange = debounce((value) => {
+    setSearch(value);
+  }, 500);
+
+  // Fetch users with search query
   const { data: users = [], isLoading, refetch } = useQuery({
-    queryKey: ['users'],
+    queryKey: ['users', search],
     queryFn: async () => {
-      const response = await axiosSecure.get('/users');
+      const response = await axiosSecure.get(`/users?search=${search}`);
       return response.data;
     }
   });
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) return <Loader />;
 
-  // Handle role update for a user
   const handleRoleUpdate = async (userId, currentRole, newRole) => {
-    // Show confirmation dialog
     const result = await Swal.fire({
       title: 'Are you sure?',
-      text: `You are about to change the role of this user from ${currentRole}.`,
+      text: `Change role from ${currentRole} to ${newRole}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#16a34a',
@@ -38,24 +39,31 @@ const AllUsers = () => {
       confirmButtonText: 'Yes, change role'
     });
 
-    if (!result.isConfirmed) {
-      return; // User cancelled the action
-    }
+    if (!result.isConfirmed) return;
 
     try {
-      // Send request to update the role
       await axiosSecure.patch(`/users/${userId}`, { role: newRole });
-      refetch(); // Refetch users to get updated data
-      toast.success(`User role updated to ${newRole}`);
+      refetch();
+      toast.success(`Role updated to ${newRole}`);
     } catch (error) {
-      console.error('Error updating role:', error);
       toast.error('Failed to update user role');
     }
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="md:p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">All Users</h2>
+
+      {/* Search Bar */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search by name or email..."
+          onChange={(e) => handleSearchChange(e.target.value)}
+          className="input input-bordered w-full md:w-1/2"
+        />
+      </div>
+
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto border-collapse">
           <thead className="bg-green-100">
@@ -67,7 +75,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(
+            {users.length > 0 ? users.map(
               (user) =>
                 user.email !== thisUser.email && (
                   <tr key={user._id}>
@@ -75,11 +83,10 @@ const AllUsers = () => {
                     <td className="py-2 px-4 border-b text-sm text-gray-700">{user.email}</td>
                     <td className="py-2 px-4 border-b text-sm text-gray-700">{user.role}</td>
                     <td className="py-2 px-4 border-b text-sm text-gray-700">
-                      {/* Conditionally render Promote / Demote buttons */}
                       {user.role === 'admin' ? (
                         <button
                           onClick={() => handleRoleUpdate(user._id, user.role, 'vendor')}
-                          className="bg-green-600 text-white py-1 px-4 rounded-md mr-2 hover:bg-green-700 transition duration-300"
+                          className="bg-green-600 w-full text-white py-1 px-4 rounded-md hover:bg-green-700 transition duration-300"
                         >
                           Demote to Vendor
                         </button>
@@ -87,28 +94,34 @@ const AllUsers = () => {
                         <>
                           <button
                             onClick={() => handleRoleUpdate(user._id, user.role, 'admin')}
-                            className="bg-green-600 text-white py-1 px-4 rounded-md mr-2 hover:bg-green-700 transition duration-300"
+                            className="bg-green-600 w-full mt-2 text-white py-1 px-4 rounded-md hover:bg-green-700 transition duration-300"
                           >
                             Promote to Admin
                           </button>
                           <button
                             onClick={() => handleRoleUpdate(user._id, user.role, 'user')}
-                            className="bg-red-600 text-white py-1 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                            className="bg-red-600 w-full mt-2 text-white py-1 px-4 rounded-md hover:bg-red-700 transition duration-300"
                           >
                             Demote to User
                           </button>
                         </>
-                      ) : user.role === 'user' ? (
+                      ) : (
                         <button
                           onClick={() => handleRoleUpdate(user._id, user.role, 'vendor')}
-                          className="bg-green-600 text-white py-1 px-4 rounded-md hover:bg-green-700 transition duration-300"
+                          className="bg-green-600 w-full mt-2 text-white py-1 px-4 rounded-md hover:bg-green-700 transition duration-300"
                         >
                           Promote to Vendor
                         </button>
-                      ) : null}
+                      )}
                     </td>
                   </tr>
                 )
+            ) : (
+              <tr>
+                <td colSpan="4" className="py-4 text-center text-gray-500">
+                  No users found.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

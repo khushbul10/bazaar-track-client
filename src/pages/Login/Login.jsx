@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import sticker from "../../assets/login.png"; // Replace with your sticker path
@@ -10,6 +10,7 @@ import { FaGoogle } from "react-icons/fa";
 const Login = () => {
   const { loginUser, googleLogin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -23,7 +24,7 @@ const Login = () => {
     try {
       await loginUser(email, password);
       toast.success("Login successful!");
-      navigate("/");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
       console.error(err);
       toast.error(`Login failed: ${err.message}`);
@@ -34,7 +35,7 @@ const Login = () => {
     try {
       await googleLogin();
       toast.success("Logged in with Google!");
-      navigate("/");
+      navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
       console.error(err);
       toast.error(`Google sign-in failed: ${err.message}`);
@@ -58,7 +59,7 @@ const Login = () => {
       </div>
 
       {/* Form Section */}
-      <div className="max-w-md w-full p-8 rounded-2xl border border-green-100 ">
+      <div className="max-w-md w-full md:p-8 rounded-2xl border border-green-100 ">
         <h2 className="text-3xl font-bold text-green-700 text-center mb-6">
           Login to Your Account
         </h2>
