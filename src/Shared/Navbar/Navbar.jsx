@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import logo from "/logo.png";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -11,6 +12,18 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
+    // Show confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out",
+    });
+
+    if (!result.isConfirmed) return;
     try {
       await logoutUser();
       toast.success("Logged out successfully!");
@@ -49,7 +62,7 @@ const Navbar = () => {
                 }`
               }
             >
-              🛍️ All Products
+              All Products
             </NavLink>
 
             {user ? (
@@ -64,13 +77,13 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  📊 Dashboard
+                  Dashboard
                 </NavLink>
                 <button
                   onClick={handleLogout}
                   className="px-3 py-2 rounded-md text-sm font-medium text-green-800 hover:bg-green-200"
                 >
-                  🚪 Logout
+                  Logout
                 </button>
               </>
             ) : (
@@ -85,7 +98,7 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  🔐 Login
+                  Login
                 </NavLink>
                 <NavLink
                   to="/register"
@@ -97,7 +110,7 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  🧾 Sign Up
+                  Sign Up
                 </NavLink>
               </>
             )}
@@ -166,7 +179,7 @@ const Navbar = () => {
               }`
             }
           >
-            🛍️ All Products
+            All Products
           </NavLink>
           {user ? (
             <>
@@ -181,7 +194,7 @@ const Navbar = () => {
                   }`
                 }
               >
-                📊 Dashboard
+                Dashboard
               </NavLink>
               <button
                 onClick={() => {
@@ -190,7 +203,7 @@ const Navbar = () => {
                 }}
                 className="w-full text-left px-3 py-2 rounded-md text-sm font-medium text-green-800 hover:bg-green-200"
               >
-                🚪 Logout
+                Logout
               </button>
             </>
           ) : (
@@ -206,7 +219,7 @@ const Navbar = () => {
                   }`
                 }
               >
-                🔐 Login
+                Login
               </NavLink>
               <NavLink
                 to="/register"
@@ -219,7 +232,7 @@ const Navbar = () => {
                   }`
                 }
               >
-                🧾 Sign Up
+                Sign Up
               </NavLink>
             </>
           )}

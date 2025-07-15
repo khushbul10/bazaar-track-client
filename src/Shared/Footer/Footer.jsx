@@ -13,14 +13,14 @@ const Footer = () => {
           <img
             src={logo}
             alt="Logo"
-            className="h-12 w-12 rounded-full bg-green-700 p-1 mb-2"
+            className="h-12 w-12 rounded-full  p-1 mb-2"
           />
-          <span className="text-green-400 font-bold text-lg">BazaarTrack</span>
+          <span className="text-green-50 font-bold text-lg">BazaarTrack</span>
         </div>
 
         {/* Contact Details */}
         <div className="flex flex-col items-center md:items-start">
-          <h3 className="text-green-400 font-semibold mb-2">Contact</h3>
+          <h3 className="text-green-50 font-semibold mb-2">Contact</h3>
           <p className="text-gray-300 text-sm">support@bazaartrack.com</p>
           <p className="text-gray-300 text-sm">+123 456 7890</p>
           <p className="text-gray-300 text-sm">Dhaka, Bangladesh</p>
@@ -28,7 +28,7 @@ const Footer = () => {
 
         {/* Terms & Conditions */}
         <div className="flex flex-col items-center md:items-start">
-          <h3 className="text-green-400 font-semibold mb-2">Legal</h3>
+          <h3 className="text-green-50 font-semibold mb-2">Legal</h3>
           <Link to="/terms" className="text-gray-300 text-sm hover:text-green-400 transition">
             Terms & Conditions
           </Link>
@@ -39,7 +39,7 @@ const Footer = () => {
 
         {/* Social Media Links */}
         <div className="flex flex-col items-center md:items-start">
-          <h3 className="text-green-400 font-semibold mb-2">Follow Us</h3>
+          <h3 className="text-green-50 font-semibold mb-2">Follow Us</h3>
           <div className="flex space-x-4">
             <motion.a
               href="https://facebook.com"
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center text-gray-400 text-sm py-4 border-t border-green-700">
+      <div className="text-center text-gray-400 text-sm py-4 border-t border-green-900">
         © {new Date().getFullYear()} BazaarTrack. All rights reserved.
       </div>
     </footer>

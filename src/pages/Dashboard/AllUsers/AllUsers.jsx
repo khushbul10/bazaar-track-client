@@ -13,9 +13,10 @@ const AllUsers = () => {
   const [search, setSearch] = useState("");
 
   // Debounce search input to avoid spamming requests
-  const handleSearchChange = debounce((value) => {
+  const handleSearchChange = (value) => {
     setSearch(value);
-  }, 500);
+    refetch();
+  };
 
   // Fetch users with search query
   const { data: users = [], isLoading, refetch } = useQuery({
@@ -26,7 +27,7 @@ const AllUsers = () => {
     }
   });
 
-  if (isLoading) return <Loader />;
+  // if (isLoading) return <Loader />;
 
   const handleRoleUpdate = async (userId, currentRole, newRole) => {
     const result = await Swal.fire({

@@ -1,45 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { Link } from "react-router";
+// import BIRDS from 'vanta/dist/vanta.birds.min'
+import VantaBackground from "./VantaBackground";
+import vantaBirdsMin from "vanta/dist/vanta.birds.min";
 
 const Banner = () => {
-  const vantaRef = useRef(null);
-  const vantaEffect = useRef(null);
-
+  const [vantaEffect, setVantaEffect] = useState(null)
+  const myRef = useRef(null)
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "/vanta.waves.min.js";
-    script.async = true;
-    
-    script.onload = () => {
-      if (window.VANTA && !vantaEffect.current) {
-        vantaEffect.current = window.VANTA.WAVES({
-          el: vantaRef.current,
-          THREE: THREE,
-          color: 0x10b981,
-          shininess: 50,
-          waveHeight: 20,
-          waveSpeed: 0.8,
-          zoom: 0.9,
-        });
-      }
-    };
-
-    document.body.appendChild(script);
-
+    if (!vantaEffect) {
+      setVantaEffect(vantaBirdsMin({
+        el: myRef.current
+      }))
+    }
     return () => {
-      if (vantaEffect.current) vantaEffect.current.destroy();
-      document.body.removeChild(script);
-    };
-  }, []);
+      if (vantaEffect) vantaEffect.destroy()
+    }
+  }, [vantaEffect])
+  
 
   return (
     <div
-      ref={vantaRef}
+      ref={myRef}
       className="relative h-[80vh] flex items-center justify-center overflow-hidden"
     >
       {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+      <div></div>
 
       {/* Content */}
       <div className="relative z-20 text-center px-4 max-w-2xl">
