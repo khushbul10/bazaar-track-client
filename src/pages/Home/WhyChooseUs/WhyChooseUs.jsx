@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: idx * 0.15 }}
             viewport={{ once: true }}
-            className="bg-white/50 backdrop-blur-md border border-green-100 rounded-xl p-6 text-center hover:shadow-xl transition"
+            className="bg-white/60 backdrop-blur-[2px] border border-green-100 rounded-xl p-6 text-center hover:shadow-xl transition"
           >
             <div className="text-green-600 flex justify-center mb-4">
               {feature.icon}

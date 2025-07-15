@@ -3,6 +3,8 @@ import Banner from '../Banner/Banner';
 import Banner2 from '../Banner2/Banner2';
 import ProductSection from '../ProductSection/ProductSection';
 import AdvertisementHighlights from '../AdvertisementHighlights/AdvertisementHighlights';
+import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
+import Testimonials from '../Testimonials/Testimonials';
 
 const Home = () => {
   return (
@@ -11,6 +13,8 @@ const Home = () => {
       {/* <Banner></Banner> */}
       <ProductSection></ProductSection>
       <AdvertisementHighlights></AdvertisementHighlights>
+      <WhyChooseUs></WhyChooseUs>
+      <Testimonials></Testimonials>
     </div>
   );
 };

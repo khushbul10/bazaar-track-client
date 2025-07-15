@@ -27,6 +27,9 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <section className="max-w-4xl mx-auto p-6">
+      
+
+
       <h2 className="text-3xl md:text-4xl font-bold text-center text-green-800 mb-8">
         Hear From Our Users
       </h2>
@@ -45,7 +48,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white/50 backdrop-blur-md border border-green-100 rounded-xl p-6 flex flex-col items-center text-center shadow hover:shadow-lg transition"
+              className="bg-white/60 backdrop-blur-[2px]  border border-green-100 rounded-xl p-6 flex flex-col items-center text-center shadow hover:shadow-lg transition"
             >
               <img
                 src={testimonial.image}

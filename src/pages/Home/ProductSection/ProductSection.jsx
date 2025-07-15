@@ -50,7 +50,7 @@ const ProductSection = () => {
             return (
               <motion.div
                 key={product._id}
-                className="bg-white rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col"
+                className="bg-white/70 backdrop-blur-[2px] rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -59,7 +59,7 @@ const ProductSection = () => {
                 <img
                   src={product.productImage}
                   alt={product.itemName}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
+                  className="w-full h-48 object-cover  rounded-lg mb-4"
                   loading="lazy"
                 />
 
