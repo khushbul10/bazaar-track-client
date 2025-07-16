@@ -13,13 +13,13 @@ const testimonials = [
   {
     name: "Mina",
     role: "Local Buyer",
-    image: "https://i.ibb.co/8M0CM5w/default-avatar.png",
+    image: "https://is4-ssl.mzstatic.com/image/thumb/Purple118/v4/fd/c9/1e/fdc91ec8-196e-d564-bbd6-8495f14026a1/source/512x512bb.jpg",
     text: "As a buyer, I can easily check fresh produce prices from home and plan my purchases, saving time and money!",
   },
   {
     name: "Vendor Raju",
     role: "Vendor at City Market",
-    image: "https://i.ibb.co/8M0CM5w/default-avatar.png",
+    image: "https://media.tenor.com/0EOCIpXM8jAAAAAe/tired-af-raju.png",
     text: "Transparency is key in local markets, and BazaarTrack provides just that with live updates and easy tracking.",
   },
 ];

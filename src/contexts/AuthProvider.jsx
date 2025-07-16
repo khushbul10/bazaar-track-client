@@ -39,11 +39,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutUser = () => {
+    localStorage.removeItem('access-token');
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      localStorage.setItem('access-token', currentUser?.accessToken || '');
       setUser(currentUser);
       setLoading(false);
     });

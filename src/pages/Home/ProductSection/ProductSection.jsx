@@ -48,12 +48,10 @@ const ProductSection = () => {
           .map((product, index) => {
             const avgRating = getAverageRating(product.reviews);
             return (
-              <motion.div
+              <div
                 key={product._id}
                 className="bg-white/70 backdrop-blur-[2px] rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                
                 data-aos="fade-up"
               >
                 <img
@@ -101,9 +99,9 @@ const ProductSection = () => {
                   to={`/products/${product._id}`}
                   className="bg-green-600 text-white text-center py-2 rounded-lg hover:bg-green-700 transition mt-auto"
                 >
-                  🔍 View Details
+                  View Details
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
       </div>

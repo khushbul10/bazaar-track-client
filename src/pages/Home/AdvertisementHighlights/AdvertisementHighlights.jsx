@@ -26,7 +26,7 @@ const AdvertisementHighlights = () => {
         className="text-3xl font-bold text-center text-green-800 mb-8"
         data-aos="fade-up"
       >
-        📣 Advertisement Highlights
+        Advertisement Highlights
       </h2>
 
       <Swiper

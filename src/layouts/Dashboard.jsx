@@ -11,6 +11,8 @@ import {
   FaSave,
 } from "react-icons/fa";
 import { IoIosAddCircle, IoMdArrowRoundBack } from "react-icons/io";
+import Footer from "../Shared/Footer/Footer";
+
 import { GrDocumentUpdate } from "react-icons/gr";
 
 import { AiFillProduct } from "react-icons/ai";
@@ -51,7 +53,7 @@ const Dashboard = () => {
     <div className="drawer lg:drawer-open">
       {/* Mobile Toggle */}
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-
+      
       <div className="drawer-content flex flex-col bg-green-50 min-h-screen">
         {/* Topbar */}
         <div className="w-full navbar bg-white shadow px-4 justify-between">
@@ -89,9 +91,10 @@ const Dashboard = () => {
         </div>
 
         {/* Nested Outlet */}
-        <div className="p-4">
+        <div className="p-4 min-h-screen">
           <Outlet />
         </div>
+        <Footer></Footer>
       </div>
 
       {/* Sidebar */}
