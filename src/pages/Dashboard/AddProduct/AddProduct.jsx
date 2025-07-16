@@ -81,10 +81,10 @@ const AddProduct = () => {
         date: data.date.toISOString(), // Ensure date is in ISO format
       };
 
-      console.log(formattedData); // Send this to your backend API for saving the product
+      // // console.log(formattedData); // Send this to your backend API for saving the product
       axiosSecure.post("/products", formattedData)
         .then(response => {
-          console.log("Product added successfully:", response.data);
+          // // console.log("Product added successfully:", response.data);
           if (response.data.acknowledged) {
             Swal.fire("Success", "Product added successfully!", "success");
             reset(); // Reset the form after successful submission
@@ -94,7 +94,7 @@ const AddProduct = () => {
           }
         })
         .catch(err => {
-          console.error("Error adding product:", err);
+          // // console.error("Error adding product:", err);
           Swal.fire("Error", "Something went wrong while adding the product", "error");
         });
 

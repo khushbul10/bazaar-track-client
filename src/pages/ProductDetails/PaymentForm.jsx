@@ -23,7 +23,7 @@ const PaymentForm = ({ product, setPaymentToggle }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic here
-    console.log("Form submitted");
+    // console.log("Form submitted");
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       return;
@@ -45,10 +45,10 @@ const PaymentForm = ({ product, setPaymentToggle }) => {
     if (error) {
       // Handle error in payment method creation
       setError(error.message);
-      console.error("Error creating payment method:", error);
+      // console.error("Error creating payment method:", error);
     } else {
       // Payment method created successfully
-      console.log("Payment Method created:", paymentMethod);
+      // console.log("Payment Method created:", paymentMethod);
       setError(null);
       // You can now send the paymentMethod.id to your server for processing
       // For example, you might want to call your backend API to complete the payment
@@ -61,7 +61,7 @@ const PaymentForm = ({ product, setPaymentToggle }) => {
           productId: product._id,
         }
       );
-      console.log("Payment Intent Response:", paymentIntentResponse.data);
+      // console.log("Payment Intent Response:", paymentIntentResponse.data);
       const { clientSecret } = paymentIntentResponse.data;
       // Confirm the payment
       const result = await stripe.confirmCardPayment(clientSecret, {
@@ -76,7 +76,7 @@ const PaymentForm = ({ product, setPaymentToggle }) => {
       if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
         setError(result.error.message);
-        console.error("Payment confirmation error:", result.error);
+        // console.error("Payment confirmation error:", result.error);
       } else {
         // The payment has been processed!
         if (result.paymentIntent.status === "succeeded") {
@@ -104,11 +104,11 @@ const PaymentForm = ({ product, setPaymentToggle }) => {
             //   confirmButtonText: "OK",
             // });
             // Optionally, redirect to a success page or update UI
-            // navigate("/dashboard/my-parcels");
             toast.success("Payment successful! Your order has been placed.");
+            navigate("/dashboard/my-orders");
             setPaymentToggle(false); // Close the payment modal
           }).catch((error) => {
-            console.error("Error confirming payment:", error);
+            // console.error("Error confirming payment:", error);
             setError("Payment confirmation failed. Please try again.");
           });
         } else {

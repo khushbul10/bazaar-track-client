@@ -5,7 +5,6 @@ import Loader from '../Shared/Loader/Loader';
 
 const AdminRoute = ({ children }) => {
   const { role, isLoading } = useUserRole();
-  const location = useLocation();
 
   if (role !== 'admin') {
     return <div className="flex items-center justify-center min-h-screen">

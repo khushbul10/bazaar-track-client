@@ -40,7 +40,7 @@ const AllProducts = () => {
       refetch(); // Refetch products to get updated data
       toast.success("Product approved successfully");
     } catch (error) {
-      console.error("Error approving product:", error);
+      // console.error("Error approving product:", error);
       toast.error("Failed to approve product");
     }
   };
@@ -68,7 +68,7 @@ const AllProducts = () => {
         }
       },
     });
-    console.log("result", result);
+    // console.log("result", result);
 
     if (result.isConfirmed) {
       try {
@@ -79,7 +79,7 @@ const AllProducts = () => {
         refetch();
         toast.success("Product rejected successfully");
       } catch (error) {
-        console.error("Error rejecting product:", error);
+        // console.error("Error rejecting product:", error);
         toast.error("Failed to reject product");
       }
     }
@@ -103,7 +103,7 @@ const AllProducts = () => {
         refetch(); // Refetch products to get updated data
         toast.success("Product removed successfully");
       } catch (error) {
-        console.error("Error removing product:", error);
+        // console.error("Error removing product:", error);
         toast.error("Failed to remove product");
       }
     }

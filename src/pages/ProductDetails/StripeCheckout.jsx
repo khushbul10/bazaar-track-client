@@ -18,7 +18,7 @@ const StripeCheckoutButton = ({ productId }) => {
       }
     } catch (error) {
       toast.error("Error with Stripe Checkout!");
-      console.error(error);
+      // console.error(error);
     }
   };
 

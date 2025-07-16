@@ -29,7 +29,7 @@ const Navbar = () => {
       toast.success("Logged out successfully!");
       navigate("/");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Logout failed");
     }
   };

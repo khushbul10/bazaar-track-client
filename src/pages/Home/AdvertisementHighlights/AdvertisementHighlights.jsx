@@ -1,19 +1,19 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loader from "../../../Shared/Loader/Loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import axios from "axios";
 
 const AdvertisementHighlights = () => {
-  const axiosSecure = useAxiosSecure();
 
   const { data: ads = [], isLoading } = useQuery({
     queryKey: ["currentAds"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/ads/current");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/ads/current`);
+      if (!res.data) throw new Error("No ads found");
       return res.data;
     },
   });

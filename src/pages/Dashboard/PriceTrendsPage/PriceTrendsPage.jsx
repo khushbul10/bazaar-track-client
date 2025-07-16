@@ -56,9 +56,9 @@ const PriceTrends = () => {
   const latestPrice = lastEntry?.price || 0;
   const lastDate = lastEntry?.rawDate;
 
-  console.log("Chart Data:", chartData);
-  console.log("Latest Price:", latestPrice);
-  console.log("Last Date:", lastDate);
+  // console.log("Chart Data:", chartData);
+  // console.log("Latest Price:", latestPrice);
+  // console.log("Last Date:", lastDate);
 
   // 3️⃣ calculate 7 days before from lastDate
   const targetDate = moment(lastDate).subtract(7, "days").toDate();
@@ -66,7 +66,7 @@ const PriceTrends = () => {
   // 4️⃣ find the closest price on or before targetDate
   let price7DaysAgo = latestPrice; // fallback if not found
 
-  console.log("Target Date:", targetDate);
+  // console.log("Target Date:", targetDate);
 
   for (let i = chartData.length - 1; i >= 0; i--) {
     if (chartData[i].rawDate <= targetDate) {
@@ -75,7 +75,7 @@ const PriceTrends = () => {
     }
   }
 
-  console.log("Price 7 Days Ago:", price7DaysAgo);
+  // console.log("Price 7 Days Ago:", price7DaysAgo);
 
   // 5️⃣ calculate trend %
   const trendPercent =
@@ -84,11 +84,11 @@ const PriceTrends = () => {
       : "0";
   const isPositive = trendPercent >= 0;
 
-  console.log("Trend Percent:", trendPercent);
+  // console.log("Trend Percent:", trendPercent);
 
 
 
-  // console.log("Tracked Item:", trackedItem);
+  // // console.log("Tracked Item:", trackedItem);
   // const chartData = trackedItem?.priceHistory
   //   ?.sort((a, b) => new Date(a.date) - new Date(b.date))
   //   ?.map((entry) => ({
@@ -96,7 +96,7 @@ const PriceTrends = () => {
   //     price: parseInt(entry.price),
   //   })) || [];
 
-  // console.log("Chart Data:", chartData);
+  // // console.log("Chart Data:", chartData);
 
   // const latestPrice = trackedItem ? Number(trackedItem.pricePerUnit) : 0;
   // const initialPrice = chartData[0]?.price || latestPrice;
@@ -110,22 +110,22 @@ const PriceTrends = () => {
   // const latestPrice = trackedItem ? Number(chartData[chartData.length - 1]?.price) : 0;
 
   // const sevenDaysAgo = moment(chartData[chartData.length - 1]?.date).subtract(7, "days").toDate();
-  // console.log("Seven Days Ago:", sevenDaysAgo);
+  // // console.log("Seven Days Ago:", sevenDaysAgo);
   // const pricesBefore7Days = chartData.filter((d) => d.rawDate <= sevenDaysAgo);
   // const price7DaysAgo =
   //   pricesBefore7Days.length > 0
   //     ? pricesBefore7Days[pricesBefore7Days.length - 1].price
   //     : chartData[0]?.price || latestPrice;
 
-  // console.log("Price 7 Days Ago:", price7DaysAgo);
-  // console.log("Latest Price:", latestPrice);
+  // // console.log("Price 7 Days Ago:", price7DaysAgo);
+  // // console.log("Latest Price:", latestPrice);
 
   // const trendPercent =
   //   price7DaysAgo !== 0
   //     ? (((latestPrice - price7DaysAgo) / price7DaysAgo) * 100).toFixed(2)
   //     : "0";
 
-  // console.log("Trend Percent:", trendPercent);
+  // // console.log("Trend Percent:", trendPercent);
   // const isPositive = trendPercent >= 0;
 
   return (

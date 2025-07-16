@@ -1,12 +1,73 @@
-# React + Vite
+# BazaarTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Purpose
 
-Currently, two official plugins are available:
+BazaarTrack is a **daily price tracker for local markets**, enabling vendors, admins, and users to track, analyze, and manage real-time fresh produce prices while maintaining transparency.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🌐 Live URL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[View Live BazaarTrack](https://bazaar-track-10.web.app/)
+
+---
+
+## 🚀 Key Features
+
+- Real-time product price tracking with price history charts
+- Date range filtering with pagination
+- Vendor advertisement management
+- Role-based dashboards (Admin, Vendor, User)
+- Stripe payment integration for vendor subscriptions
+- Firebase authentication and authorization
+- Modern, responsive UI with animations
+- CSV data export
+- Protected routes and role checks
+- Search and filter products and users
+
+---
+
+## 🛠️ Tech Stack & Packages Used
+
+### Frontend Packages:
+
+- react, react-dom, react-router
+- tailwindcss
+- @tanstack/react-query
+- axios
+- firebase
+- framer-motion, gsap, aos
+- vanta, three
+- sweetalert2, react-toastify
+- react-icons, phosphor-react
+- react-hook-form
+- recharts
+- react-date-range, react-datepicker
+- react-simple-typewriter
+- swiper
+- stripe (react-stripe-js, stripe-js)
+- moment, date-fns
+- lodash
+- json2csv, react-csv
+
+### Backend Packages:
+
+- express
+- cors
+- dotenv
+- mongodb
+- cloudinary
+- firebase-admin
+- stripe
+
+---
+
+Visit the app at: `https://bazaar-track-10.web.app/`
+
+---
+
+
+## ✨ Credits
+
+Built as a **portfolio-ready SaaS system for market price tracking**, demonstrating real-world, scalable full-stack development with React, Express, and MongoDB.
+

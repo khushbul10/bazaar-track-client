@@ -96,14 +96,14 @@ const MyAdvertisements = () => {
       const { adTitle, shortDescription, status, productImage } = formData;
 
       let imageUrl = productImage;
-      console.log("Image URL before upload:", imageUrl);
-      console.log("Product Image Type:", productImage);
+      // console.log("Image URL before upload:", imageUrl);
+      // console.log("Product Image Type:", productImage);
       if (typeof(productImage) !== "string") {
         await new Promise((resolve) => {
-          console.log("Uploading image...");
+          // console.log("Uploading image...");
           uploadImage(productImage[0], {
             onSuccess: (url) => {
-              console.log("Image uploaded successfully:", url);
+              // console.log("Image uploaded successfully:", url);
               imageUrl = url;
               resolve();
             },
@@ -123,7 +123,7 @@ const MyAdvertisements = () => {
         vendorEmail: user?.email,
         productImage: imageUrl || currentAd?.productImage, // Use existing image if not updated
       };
-      console.log("Submitting Ad Data:", adData);
+      // console.log("Submitting Ad Data:", adData);
 
       if (currentAd) {
         await axiosSecure.patch(`/advertisements/${currentAd._id}`, adData);

@@ -69,7 +69,7 @@ const UpdateProduct = () => {
   // Handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
+    // console.log("Form submitted with data:", formData);
     try {
       let updatedImageUrl = imageUrl; // Preserve existing image URL if not updating
       if (formData.productImage && typeof formData.productImage !== "string") {
@@ -104,7 +104,7 @@ const UpdateProduct = () => {
             ? formData.date.toISOString()
             : formData.date, // Ensure date is in ISO format
       };
-      console.log("Formatted Data:", formattedData);
+      // console.log("Formatted Data:", formattedData);
 
       await axiosSecure
         .patch(`/products/${productId}`, formattedData)
@@ -113,7 +113,7 @@ const UpdateProduct = () => {
           navigate("/dashboard/my-products") // Redirect to My Products page after successful update
         })
         .catch((error) => {
-          console.error("Error updating product:", error);
+          // console.error("Error updating product:", error);
           toast.error("Failed to update product");
         });
 

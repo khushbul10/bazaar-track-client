@@ -26,7 +26,7 @@ const Login = () => {
       toast.success("Login successful!");
       navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       toast.error(`Login failed: ${err.message}`);
     }
   };
@@ -37,7 +37,7 @@ const Login = () => {
       toast.success("Logged in with Google!");
       navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       toast.error(`Google sign-in failed: ${err.message}`);
     }
   };

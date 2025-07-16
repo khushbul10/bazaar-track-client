@@ -28,8 +28,8 @@ const ProductDetails = () => {
   const [paymentToggle, setPaymentToggle] = useState(true); // Toggle for payment form
   const { user } = useAuth();
   const { role, isLoading: roleLoading } = useUserRole();
-  console.log(role);
-  console.log(user);
+  // console.log(role);
+  // console.log(user);
   const axiosSecure = useAxiosSecure();
   // const [reviews, setReviews] = useState([]);
   // const [watchlist, setWatchlist] = useState(false); // For watchlist feature
@@ -64,7 +64,7 @@ const ProductDetails = () => {
     },
     enabled: !!user?.email && !!productId, // Only run if user is logged in and productId is available
   });
-  console.log("watchlist data", watchlistData);
+  // console.log("watchlist data", watchlistData);
   // const watchlistData = {
   //   exists: false, // Placeholder for watchlist existence check
   // }
@@ -99,7 +99,7 @@ const ProductDetails = () => {
         refetchWatchlist(); // Refetch watchlist data to update UI
       })
       .catch((error) => {
-        console.error("Error adding to watchlist:", error);
+        // console.error("Error adding to watchlist:", error);
         toast.error("Failed to add product to watchlist.");
       });
     }
@@ -149,11 +149,12 @@ const ProductDetails = () => {
         userPhotoURL:
           user.photoURL || "https://i.ibb.co/8M0CM5w/default-avatar.png",
       };
-      console.log(reviewData);
+      // console.log(reviewData);
       await axiosSecure.patch(`/products/${productId}/review`, reviewData); // Submit the review to the backend
       refetch(); // Refetch product details to update reviews
       // setReviews((prevReviews) => [...prevReviews, reviewData]); // Add new review to the list
       toast.success("Review submitted successfully!");
+      setUserReview({ rating: 0, comment: "" }); // Reset review form
     } catch (error) {
       toast.error("Error submitting review!");
     }

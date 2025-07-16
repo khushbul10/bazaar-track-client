@@ -42,7 +42,7 @@ class MainLayout extends React.Component {
     return (
       <div
         ref={this.vantaRef}
-        className="flex flex-col min-h-screen bg-green-50"
+        className="flex flex-col justify-between min-h-screen bg-green-50"
       >
         {/* Header */}
         <Navbar></Navbar>

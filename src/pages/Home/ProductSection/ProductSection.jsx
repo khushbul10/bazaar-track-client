@@ -96,7 +96,7 @@ const ProductSection = () => {
                 </div>
 
                 <Link
-                  to={`/products/${product._id}`}
+                  to={`/product/${product._id}`}
                   className="bg-green-600 text-white text-center py-2 rounded-lg hover:bg-green-700 transition mt-auto"
                 >
                   View Details

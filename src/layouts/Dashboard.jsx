@@ -10,6 +10,8 @@ import {
   FaShoppingCart,
   FaSave,
 } from "react-icons/fa";
+import { FaArrowTrendUp } from "react-icons/fa6";
+
 import { IoIosAddCircle, IoMdArrowRoundBack } from "react-icons/io";
 import Footer from "../Shared/Footer/Footer";
 
@@ -228,7 +230,7 @@ const Dashboard = () => {
                     isActive ? "bg-green-600 font-semibold" : ""
                   }
                 >
-                  <FaShoppingCart/> Price Trends
+                  <FaArrowTrendUp/> Price Trends
                 </NavLink>
               </li>
               <li>

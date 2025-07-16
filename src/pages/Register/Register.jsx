@@ -72,7 +72,7 @@ const Register = () => {
       toast.success("Registration successful!");
       navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
-      console.error("Registration error:", err);
+      // console.error("Registration error:", err);
       toast.error(`Registration failed: ${err.message}`);
     }
   };
@@ -91,7 +91,7 @@ const Register = () => {
       toast.success("Logged in with Google!");
       navigate(location.state?.from || "/", { replace: true });
     } catch (err) {
-      console.error("Google sign-in error:", err);
+      // console.error("Google sign-in error:", err);
       toast.error(`Google sign-in failed: ${err.message}`);
     }
   };

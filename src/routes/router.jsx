@@ -21,13 +21,14 @@ import MyWatchlist from "../pages/Dashboard/MyWatchlist/MyWatchlist";
 import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import AllOrders from "../pages/Dashboard/AllOrders/AllOrder";
 import PriceTrendsPage from "../pages/Dashboard/PriceTrendsPage/PriceTrendsPage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: <div>Error occurred</div>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
