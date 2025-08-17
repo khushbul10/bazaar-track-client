@@ -72,6 +72,7 @@ const AllProductsPage = () => {
         startDate: calendarState[0].startDate.toISOString(),
         endDate: calendarState[0].endDate.toISOString(),
       });
+
       setCurrentPage(1);
     }
   }, [calendarState]);
@@ -220,11 +221,10 @@ const AllProductsPage = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className={`px-4 py-2 rounded ${
-            currentPage === 1
+          className={`px-4 py-2 rounded ${currentPage === 1
               ? "bg-gray-300"
               : "bg-green-600 text-white hover:bg-green-700"
-          }`}
+            }`}
         >
           Prev
         </button>
@@ -234,11 +234,10 @@ const AllProductsPage = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === data.totalPages}
-          className={`px-4 py-2 rounded ${
-            currentPage === data.totalPages
+          className={`px-4 py-2 rounded ${currentPage === data.totalPages
               ? "bg-gray-300"
               : "bg-green-600 text-white hover:bg-green-700"
-          }`}
+            }`}
         >
           Next
         </button>
