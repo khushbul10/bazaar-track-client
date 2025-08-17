@@ -6,6 +6,7 @@ import moment from "moment";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
 
 const ProductSection = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,10 +14,13 @@ const ProductSection = () => {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["latestProducts"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/products/latest");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/products/latest`);
       return res.data;
     },
+
   });
+  console.log(products);
+
 
   if (isLoading) return <Loader />;
 
@@ -43,9 +47,7 @@ const ProductSection = () => {
       </h2>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {products
-          .filter((product) => isRecent(product.date))
-          .map((product, index) => {
+        {products.map((product, index) => {
             const avgRating = getAverageRating(product.reviews);
             return (
               <div

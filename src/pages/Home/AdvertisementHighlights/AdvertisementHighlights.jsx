@@ -13,10 +13,10 @@ const AdvertisementHighlights = () => {
     queryKey: ["currentAds"],
     queryFn: async () => {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/ads/current`);
-      if (!res.data) throw new Error("No ads found");
       return res.data;
     },
   });
+  console.log(ads);
 
   if (isLoading) return <Loader />;
 
