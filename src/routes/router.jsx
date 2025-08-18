@@ -23,6 +23,7 @@ import AllOrders from "../pages/Dashboard/AllOrders/AllOrder";
 import PriceTrendsPage from "../pages/Dashboard/PriceTrendsPage/PriceTrendsPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
+import OverviewPage from "../pages/Dashboard/OverviewPage/OverviewPage";
 
 
 export const router = createBrowserRouter([
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <PrivateRoute><ProfilePage /></PrivateRoute>
+      },
+      {
+        index: true,
+        element: <PrivateRoute><OverviewPage /></PrivateRoute>
       },
 
 
