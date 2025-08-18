@@ -22,6 +22,7 @@ import MyProducts from "../pages/Dashboard/MyProducts/MyProducts";
 import AllOrders from "../pages/Dashboard/AllOrders/AllOrder";
 import PriceTrendsPage from "../pages/Dashboard/PriceTrendsPage/PriceTrendsPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ProfilePage from "../pages/Dashboard/ProfilePage/ProfilePage";
 
 
 export const router = createBrowserRouter([
@@ -71,6 +72,8 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><PriceTrendsPage /></PrivateRoute>
       },
       {
+        path: "profile",
+        element: <PrivateRoute><ProfilePage /></PrivateRoute>
       },
 
 
